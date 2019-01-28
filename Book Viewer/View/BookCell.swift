@@ -10,6 +10,9 @@ import UIKit
 
 class BookCell: UITableViewCell {
     
+    
+    // MARK: - Properties
+    
     var book : Book? {
         didSet {
             coverImageView.image = book?.image
@@ -43,6 +46,10 @@ class BookCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    
+    // MARK: - Initializers
+
     
     // Lets create BookCell here
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

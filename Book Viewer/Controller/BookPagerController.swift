@@ -23,7 +23,7 @@ class BookPagerController : UICollectionViewController, UICollectionViewDelegate
         collectionView.backgroundColor = .white
         
         // Lets register UICollectionView cell here
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView.register(PageCell.self, forCellWithReuseIdentifier: cellID)
         
         // Lets set the Horizotal scrolling in collection view here
         let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
@@ -47,13 +47,7 @@ class BookPagerController : UICollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
-        
-        if indexPath.row % 2 == 0 {
-            cell.backgroundColor = .red
-        } else {
-            cell.backgroundColor = .blue
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! PageCell
         
         return cell
     }

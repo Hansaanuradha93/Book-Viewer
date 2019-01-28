@@ -30,6 +30,8 @@ class ViewController: UITableViewController {
         navigationItem.title = "Kindle"
         createBooks()
         
+        fetchBooks()
+        
     }
     
     // MARK: - TableView Datasource methods
@@ -85,6 +87,34 @@ class ViewController: UITableViewController {
         
     }
 
+    // Fetch Books from JSON here
+    func fetchBooks() {
+        print("Start Fetching books")
+        
+        guard let url = URL(string: "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/kindle.json") else { return }
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            
+            // There is an error
+            if let unwrappedError = error {
+                print("Error fetching books \(unwrappedError)")
+                return
+            }
+            
+            // No errors.. Good to go
+            
+            // Unwrap data
+            guard let unwraptedData = data else { return }
+            
+            guard let dataAsString = String(data: unwraptedData, encoding: .utf8) else { return }
+            
+            print(dataAsString)
+            
+            
+        }.resume()
+        
+        print("Have we fetched our books yet?")
+        
+    }
 
 }
 

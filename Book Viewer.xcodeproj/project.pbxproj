@@ -14,6 +14,7 @@
 		4775D3B721FB5D8E00A7E5D4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4775D3B621FB5D8E00A7E5D4 /* Book.swift */; };
 		4775D3B921FB5ED200A7E5D4 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4775D3B821FB5ED200A7E5D4 /* Page.swift */; };
 		47D8BDCA21FECFB3004D39BE /* BookPagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8BDC921FECFB3004D39BE /* BookPagerController.swift */; };
+		47D8BDCC21FF3F47004D39BE /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D8BDCB21FF3F47004D39BE /* PageCell.swift */; };
 		47E8AC9321FE0EA00067FF5A /* BookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E8AC9221FE0EA00067FF5A /* BookCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 		4775D3B621FB5D8E00A7E5D4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		4775D3B821FB5ED200A7E5D4 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
 		47D8BDC921FECFB3004D39BE /* BookPagerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPagerController.swift; sourceTree = "<group>"; };
+		47D8BDCB21FF3F47004D39BE /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		47E8AC9221FE0EA00067FF5A /* BookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				47E8AC9221FE0EA00067FF5A /* BookCell.swift */,
+				47D8BDCB21FF3F47004D39BE /* PageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -181,6 +184,7 @@
 				4775D3B921FB5ED200A7E5D4 /* Page.swift in Sources */,
 				4775D3B721FB5D8E00A7E5D4 /* Book.swift in Sources */,
 				47E8AC9321FE0EA00067FF5A /* BookCell.swift in Sources */,
+				47D8BDCC21FF3F47004D39BE /* PageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
