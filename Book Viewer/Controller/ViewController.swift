@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
     private var allBooks : [Book]?
     fileprivate let cellID = "CellID"
     
+    
     // MARK: - ViewController methods
 
     override func viewDidLoad() {
@@ -25,8 +26,9 @@ class ViewController: UITableViewController {
         // Remove uneccessary tableview cells in footer
         tableView.tableFooterView = UIView()
         
+        // Lets set nabigation item title here
         navigationItem.title = "Kindle"
-        printBooks()
+        createBooks()
         
     }
     
@@ -38,13 +40,13 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! BookCell
     
-        let book = allBooks?[indexPath.row]
+        // Lets get the book here
+        guard let book = allBooks?[indexPath.row] else { return cell }
         
-//        cell.textLabel?.text = book?.title ?? "No Books Added Yet!"
-//        cell.imageView?.image = book?.image
-        
+        // Add the data to the book cell
+        cell.book = book
         return cell
     }
     
@@ -52,10 +54,20 @@ class ViewController: UITableViewController {
         return 86
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // Lets navigate to book page viewer which is a UICollectionViewController here
+        let layout = UICollectionViewFlowLayout()
+        let bookPageCotroller = BookPagerController(collectionViewLayout: layout)
+        // Lets create a Navigation Controller here
+        let navController = UINavigationController(rootViewController: bookPageCotroller)
+        present(navController, animated: true, completion: nil)
+    }
+    
     
     // MARK: - Functions
 
-    func printBooks() {
+    func createBooks() {
         
         let book1 = Book(title : "Harry Potter", author : "Hansa", image : UIImage(named: "bill")!, pages : [
             Page(text : "Page 1", number : 1),

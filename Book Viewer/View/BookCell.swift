@@ -10,30 +10,35 @@ import UIKit
 
 class BookCell: UITableViewCell {
     
+    var book : Book? {
+        didSet {
+            coverImageView.image = book?.image
+            titleLabel.text = book?.title
+            authorLabel.text = book?.author
+        }
+    }
+    
     // Lets create a image view here
-    let coverImageView : UIImageView = {
+    private var coverImageView : UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .red
         // Lets enable auto layout here
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     // Lets create a label for title here
-    let titleLabel : UILabel = {
+    private var titleLabel : UILabel = {
         let label = UILabel()
-        label.text = "Lets Add Title Here"
-        label.backgroundColor = .blue
+//        label.text = "Lets Add Title Here"
         // Lets enable auto layout here
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     // Lets create a label from author here
-    let authorLabel : UILabel = {
+    private var authorLabel : UILabel = {
         let label = UILabel()
-        label.text = "lets add author"
-        label.backgroundColor = .green
+//        label.text = "lets add author"
         // Lets enable auto layout here
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -46,9 +51,9 @@ class BookCell: UITableViewCell {
         // Lets add the image view to the book cell here
         addSubview(coverImageView)
         // Lets add the contraints here
-        coverImageView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8).isActive = true
-        coverImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8).isActive = true
-        coverImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8).isActive = true
+        coverImageView.leftAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leftAnchor, constant: 8).isActive = true
+        coverImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        coverImageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -8).isActive = true
         coverImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         
         
