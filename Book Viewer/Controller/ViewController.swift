@@ -28,8 +28,8 @@ class ViewController: UITableViewController {
         
         // Lets set nabigation item title here
         navigationItem.title = "Kindle"
-        createBooks()
         
+        // Lets fetch some new books from the json here
         fetchBooks()
         
     }
@@ -58,9 +58,16 @@ class ViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+        // Lets get the selected book here
+        let selectedBook = allBooks?[indexPath.row]
+        
         // Lets navigate to book page viewer which is a UICollectionViewController here
         let layout = UICollectionViewFlowLayout()
         let bookPageCotroller = BookPagerController(collectionViewLayout: layout)
+        
+        // Lets pass the selected book to bookPageController
+        bookPageCotroller.book = selectedBook
+        
         // Lets create a Navigation Controller here
         let navController = UINavigationController(rootViewController: bookPageCotroller)
         present(navController, animated: true, completion: nil)
@@ -69,52 +76,52 @@ class ViewController: UITableViewController {
     
     // MARK: - Functions
 
-    func createBooks() {
-        
-        let book1 = Book(title : "Harry Potter", author : "Hansa", image : UIImage(named: "bill")!, pages : [
-            Page(text : "Page 1", number : 1),
-            Page(text : "Page 2", number : 2)
-            ])
-        
-        let book2 = Book(title: "Bill Gates", author: "Michal Begret", image : UIImage(named: "steve")!, pages: [
-            Page(text : "text for page 1", number : 1),
-            Page(text : "text for page 2", number : 2),
-            Page(text : "text for page 3", number : 3),
-            Page(text : "text for page 4", number : 4),
-            ])
-        
-        allBooks = [book1, book2]
-        
-    }
-
+    
     // Fetch Books from JSON here
     func fetchBooks() {
         print("Start Fetching books")
         
         guard let url = URL(string: "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/kindle.json") else { return }
         URLSession.shared.dataTask(with: url) { (data, response, error) in
-            
             // There is an error
             if let unwrappedError = error {
                 print("Error fetching books \(unwrappedError)")
                 return
             }
-            
             // No errors.. Good to go
-            
-            // Unwrap data
+            // Lets unwrap data
             guard let unwraptedData = data else { return }
-            
-            guard let dataAsString = String(data: unwraptedData, encoding: .utf8) else { return }
-            
-            print(dataAsString)
-            
-            
-        }.resume()
-        
-        print("Have we fetched our books yet?")
-        
-    }
+            // Lets parse the JSON
+            do {
+                // Lets parse the JSON content
+                let json = try JSONSerialization.jsonObject(with: unwraptedData, options: .mutableContainers)
 
+                // Lets reate a book dictionary here
+                guard let bookDictionaries = json as? [[String : Any]] else { return }
+                
+                // Lets initialize this array to a empty array instead of having a nil value
+                self.allBooks = []
+                
+                for bookDictionary in bookDictionaries {
+
+                    // Lets crate a book to store the book dictionary
+                    let book = Book(dictionary: bookDictionary)
+                    
+                    // Lets append the books to allBooks
+                    self.allBooks?.append(book)
+                    
+                }
+                
+                // Lets reload the tableview with newly added books in main thread instead in background thread here
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            } catch let jsonError {
+                
+                print("Error Parsing JSON \(jsonError)")
+            }
+        }.resume()
+    }
 }
 

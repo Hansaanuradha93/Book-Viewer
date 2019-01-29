@@ -10,7 +10,6 @@ import UIKit
 
 class BookCell: UITableViewCell {
     
-    
     // MARK: - Properties
     
     var book : Book? {

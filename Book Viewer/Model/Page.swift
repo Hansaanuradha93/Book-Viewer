@@ -9,6 +9,11 @@
 import Foundation
 
 struct Page {
-    let text : String
     let number : Int
+    let text : String
+    
+    init(number : Int, text : String) {
+        self.number = number
+        self.text = text
+    }
 }
